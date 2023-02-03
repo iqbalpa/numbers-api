@@ -1,10 +1,10 @@
 import React from "react";
-import SearchBar from "./components/SearchBar/SearchBar";
+import Main from "./layout/Main";
 
 export default function App() {
 	return (
-		<div className="flex justify-center items-center h-screen bg-gradient-to-br from-fuchsia-500 to-sky-500">
-			<SearchBar />
+		<div className="bg flex justify-center p-14 items-center h-screen">
+			<Main />
 		</div>
 	);
 }

@@ -31,7 +31,7 @@ const SearchBar = () => {
 			})
 			.finally(() => {
 				setLoading(false);
-				setError(false);
+				// setError(false);
 			});
 	};
 

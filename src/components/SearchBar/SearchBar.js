@@ -82,7 +82,14 @@ const SearchBar = () => {
 						Loading...
 					</button>
 				)}
-				{error && <p>Something went wrong...</p>}
+				{
+					error && (
+						<div className="flex justify-center items-center w-[17rem] h-[7rem] text-white font-semibold hover:scale-105 duration-150 bg-red-500 hover:bg-red-700 hover:cursor-pointer rounded-lg">
+							<p>Something went wrong...</p>
+						</div>
+					)
+					// <p>Something went wrong...</p>
+				}
 				{!loading && data && <Card number={value} data={data} />}
 			</div>
 		</div>

@@ -40,8 +40,8 @@ const SearchBar = () => {
 	}, [data]);
 
 	return (
-		<div className="flex flex-col justify-center items-center">
-			<form className="w-[34rem] m-6" onSubmit={handleSubmit}>
+		<div className="flex pb-20 lg:pb-0 h-full lg:h-min flex-col justify-center items-center">
+			<form className="w-screen px-5 lg:w-[34rem] m-3 lg:m-6" onSubmit={handleSubmit}>
 				<label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">
 					Search
 				</label>
@@ -82,14 +82,11 @@ const SearchBar = () => {
 						Loading...
 					</button>
 				)}
-				{
-					error && (
-						<div className="flex justify-center items-center w-[17rem] h-[7rem] text-white font-semibold hover:scale-105 duration-150 bg-red-500 hover:bg-red-700 hover:cursor-pointer rounded-lg">
-							<p>Something went wrong...</p>
-						</div>
-					)
-					// <p>Something went wrong...</p>
-				}
+				{error && (
+					<div className="flex justify-center items-center w-full h-full lg:w-[17rem] lg:h-[7rem] px-4 py-2 text-white font-semibold hover:scale-105 duration-150 bg-red-500 hover:bg-red-700 hover:cursor-pointer rounded-lg">
+						<p>Something went wrong...</p>
+					</div>
+				)}
 				{!loading && data && <Card number={value} data={data} />}
 			</div>
 		</div>

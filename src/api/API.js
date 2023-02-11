@@ -12,7 +12,7 @@ const API = {
 			.then((res) => res.text())
 			.then((data) => data);
 	},
-	fetchDate: async (day, month) => {
+	fetchDate: async (month, day) => {
 		return fetch(`${BASE_URL}/${month}/${day}/date`)
 			.then((res) => res.text())
 			.then((data) => data);

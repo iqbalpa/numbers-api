@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Card from "../Card/Card";
 import API from "../../api/API";
 
@@ -16,7 +16,8 @@ const SearchBar = () => {
 			case "year":
 				return API.fetchYear(value);
 			case "date":
-				return API.fetchDate(value);
+				const [month, day] = value.split("/");
+				return API.fetchDate(month, day);
 			default:
 				return API.fetchTrivia(value);
 		}
@@ -28,7 +29,7 @@ const SearchBar = () => {
 		e.preventDefault();
 		setLoading(true);
 
-		if (isNaN(value)) {
+		if (type !== "date" && isNaN(value)) {
 			setError(true);
 			setLoading(false);
 			setData(null);
@@ -39,7 +40,6 @@ const SearchBar = () => {
 		selectedFunction()
 			.then((data) => {
 				setData(data);
-				// console.log("data is: ", data);
 			})
 			.catch((err) => {
 				setError(true);
@@ -48,10 +48,6 @@ const SearchBar = () => {
 				setLoading(false);
 			});
 	};
-
-	// useEffect(() => {
-	// 	console.log(type);
-	// }, [type]);
 
 	return (
 		<div className="flex pb-20 lg:pb-0 h-full lg:h-min flex-col justify-center items-center">

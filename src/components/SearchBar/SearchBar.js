@@ -7,9 +7,23 @@ const SearchBar = () => {
 	const [data, setData] = useState(null);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(false);
-	const [type, setType] = useState("");
+	const [type, setType] = useState("trivia");
+
+	const selectedFunction = () => {
+		switch (type) {
+			case "math":
+				return API.fetchMath(value);
+			case "year":
+				return API.fetchYear(value);
+			case "date":
+				return API.fetchDate(value);
+			default:
+				return API.fetchTrivia(value);
+		}
+	};
 
 	const handleChange = (e) => setValue(e.target.value);
+	const handleTypeChange = (e) => setType(e.target.value);
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		setLoading(true);
@@ -18,35 +32,33 @@ const SearchBar = () => {
 			setError(true);
 			setLoading(false);
 			setData(null);
-			console.log("not a number");
 			alert("not a number");
 			return;
 		}
 
-		API.fetchMath(value)
+		selectedFunction()
 			.then((data) => {
 				setData(data);
-				console.log("data is: ", data);
+				// console.log("data is: ", data);
 			})
 			.catch((err) => {
 				setError(true);
 			})
 			.finally(() => {
 				setLoading(false);
-				// setError(false);
 			});
 	};
 
-	useEffect(() => {
-		console.log("data is: ", data);
-	}, [data]);
+	// useEffect(() => {
+	// 	console.log(type);
+	// }, [type]);
 
 	return (
 		<div className="flex pb-20 lg:pb-0 h-full lg:h-min flex-col justify-center items-center">
-			<div className="flex flex-row justify-center items-center">
+			<div className="flex flex-col lg:flex-row justify-center items-center">
 				<form className="flex flex-row justify-center items-center">
 					<label className="m-2">choose type:</label>
-					<select name="type" className="px-4 py-2 rounded-md">
+					<select value={type} name="type" onChange={handleTypeChange} className="px-4 py-2 rounded-md">
 						<option value="trivia">Trivia</option>
 						<option value="math">Math</option>
 						<option value="year">Year</option>

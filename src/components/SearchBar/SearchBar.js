@@ -28,6 +28,7 @@ const SearchBar = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		setLoading(true);
+		setError(false);
 
 		if (type !== "date" && isNaN(value)) {
 			setError(true);
@@ -52,9 +53,8 @@ const SearchBar = () => {
 	return (
 		<div className="flex pb-20 lg:pb-0 h-full lg:h-min flex-col justify-center items-center">
 			<div className="flex flex-col lg:flex-row justify-center items-center">
-				<form className="flex flex-row justify-center items-center">
-					<label className="m-2">choose type:</label>
-					<select value={type} name="type" onChange={handleTypeChange} className="px-4 py-2 rounded-md">
+				<form className="flex flex-col justify-center items-center text-white">
+					<select value={type} name="type" onChange={handleTypeChange} className="select select-bordered w-36 px-4 py-2 rounded-md">
 						<option value="trivia">Trivia</option>
 						<option value="math">Math</option>
 						<option value="year">Year</option>
@@ -93,7 +93,7 @@ const SearchBar = () => {
 				{loading && (
 					<button
 						type="button"
-						class="inline-flex items-center px-4 py-2 font-semibold leading-6 text-sm shadow rounded-md text-white bg-red-500 hover:bg-red-400 transition ease-in-out duration-150 cursor-not-allowed"
+						class="inline-flex items-center px-4 py-2 font-semibold leading-6 text-sm shadow rounded-md text-white bg-blue-500 hover:bg-blue-400 transition ease-in-out duration-150 cursor-not-allowed"
 						disabled=""
 					>
 						<svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -104,8 +104,13 @@ const SearchBar = () => {
 					</button>
 				)}
 				{error && (
-					<div className="flex justify-center items-center w-full h-full lg:w-[17rem] lg:h-[7rem] px-4 py-2 text-white font-semibold hover:scale-105 duration-150 bg-red-500 hover:bg-red-700 hover:cursor-pointer rounded-lg">
-						<p>Something went wrong...</p>
+					<div className="alert alert-error shadow-lg">
+						<div>
+							<svg xmlns="http://www.w3.org/2000/svg" className="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+								<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+							</svg>
+							<span>Something went wrong.</span>
+						</div>
 					</div>
 				)}
 				{!loading && data && <Card number={value} data={data} />}

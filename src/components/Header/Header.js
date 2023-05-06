@@ -2,7 +2,7 @@ import React from "react";
 
 const Header = () => {
 	return (
-		<div className="w-full flex flex-row justify-between items-center h-20 rounded-t-xl">
+		<div className="text-black w-full flex flex-row justify-between items-center h-20 rounded-t-xl">
 			<h1 className="pl-8 font-bold text-lg lg:text-xl">IQBALPA</h1>
 			<div className="pr-8">
 				<a className="m-2 font-semibold hover:text-gray-700 text-lg hover:text-xl lg:text-md lg:hover:text-xl duration-150" href="https://medium.com/@iqbalpa" rel="noreferrer" target="_blank">
